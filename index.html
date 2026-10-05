@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,16 +75,6 @@ html, body {
   padding: 8px 8px;
   min-height: 40px;
   max-width: 46vw;
-}
-#toolbar .brand {
-  font-family: Georgia, serif;
-  font-weight: bold;
-  font-size: 1em;
-  color: #f4ecd8;
-  text-shadow: 1px 1px 0 #4a4339;
-  margin-right: 4px;
-  letter-spacing: 0.5px;
-  display: none;
 }
 #toolbar .spacer { flex: 1; min-width: 0; }
 #fontsize-val {
@@ -204,7 +195,7 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
 }
 #welcome button:active { background: #a8a297; }
 
-/* Mini palette — appears once after selection, dismisses after one tap */
+/* Mini palette — appears once after selection, gone after one tap */
 #minipalette {
   position: absolute;
   display: none;
@@ -224,7 +215,6 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   border: 1.5px solid #7f7666;
   cursor: pointer;
   padding: 0;
-  touch-action: manipulation;
 }
 #minipalette .s-yellow { background: #ffe28a; }
 #minipalette .s-green  { background: #b8e0b8; }
@@ -349,6 +339,11 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   white-space: pre-wrap;
   word-wrap: break-word;
   margin-bottom: 8px;
+  color: #39352d;
+}
+.card .body.empty {
+  color: #93756c;
+  font-style: italic;
 }
 .card .card-swatches {
   display: flex;
@@ -357,14 +352,16 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   flex-wrap: wrap;
 }
 .card .card-swatches .swatch {
-  width: 30px; height: 30px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   border: 1.5px solid #7f7666;
   cursor: pointer;
   padding: 0;
   touch-action: manipulation;
 }
-.card .card-swatches .swatch.active { box-shadow: 0 0 0 2px #702510; }
+.card .card-swatches .swatch.active {
+  box-shadow: 0 0 0 2px #702510;
+}
 .card .card-swatches .s-yellow { background: #ffe28a; }
 .card .card-swatches .s-green  { background: #b8e0b8; }
 .card .card-swatches .s-pink   { background: #f4b8d0; }
@@ -384,7 +381,7 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   border-radius: 6px;
   box-shadow: inset 0 0 5px #7f7666;
   padding: 8px 10px;
-  min-height: 42px;
+  min-height: 40px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -393,13 +390,19 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   touch-action: manipulation;
 }
 .card .card-actions button:active { background: #a8a297; }
-.card .card-actions button.danger { color: #702510; border-color: #916e6e; }
+.card .card-actions button.danger {
+  color: #702510;
+  border-color: #916e6e;
+}
 
-.card .note-editor { display: none; margin-top: 10px; }
+.card .note-editor {
+  display: none;
+  margin-top: 10px;
+}
 .card .note-editor.open { display: block; }
 .card .note-editor textarea {
   width: 100%;
-  min-height: 110px;
+  min-height: 100px;
   background: #f2ecdd;
   border: 1.5px solid #7f7666;
   border-radius: 6px;
@@ -426,7 +429,7 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   border-radius: 6px;
   box-shadow: inset 0 0 5px #7f7666;
   padding: 8px 16px;
-  min-height: 42px;
+  min-height: 40px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 600;
@@ -436,6 +439,7 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
 }
 .card .note-editor .editor-actions button.primary {
   background: #a8cbe8;
+  border-color: #7f7666;
 }
 
 #notes-empty {
@@ -573,6 +577,8 @@ body.theme-dark .card .quote {
   border-left-color: #4a4138;
 }
 body.theme-dark .card .quote:active { background: #3a332c; }
+body.theme-dark .card .body { color: #c9bfae; }
+body.theme-dark .card .body.empty { color: #7a6f5e; }
 body.theme-dark .card .card-actions button {
   background: #3a332c;
   border-color: #1a1614;
@@ -610,22 +616,12 @@ body.theme-dark mark.hl-blue   { background-color: #2a4a6b !important; color: #d
 body.theme-dark mark.hl-purple { background-color: #4a3a6b !important; color: #e8dcf8; }
 
 @media (min-width: 600px) {
-  #toolbar .brand { display: inline; }
   #main { padding: 24px 16px 60px; }
   #work { padding: 40px 40px; }
-  #sidebar {
-    width: 380px;
-    max-width: 90vw;
-    border-left: 2px solid #7f7666;
-  }
+  #sidebar { width: 380px; max-width: 90vw; border-left: 2px solid #7f7666; }
   #chapter-nav { order: initial; flex: 0 1 auto; }
 }
 </style>
-<meta name="theme-color" content="#7f7666">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -935,8 +931,6 @@ function escapeHtml(s) {
   });
 }
 
-/* Link rewriting: in-page anchors scroll with offset; external links open in new tab;
-   relative file links show a toast instead of crashing. */
 function processLinks(root) {
   var links = root.querySelectorAll('a[href]');
   links.forEach(function (a) {
@@ -1138,6 +1132,7 @@ function pointToOffset(map, node, localOffset) {
   return -1;
 }
 
+/* ---- Selection detection ---- */
 function isInsideHighlight(target) {
   var node = target;
   while (node && node !== document) {
@@ -1163,25 +1158,32 @@ function showMiniPalette(rect) {
   minipalette.classList.add('show');
 }
 
-function tryShowPaletteFromSelection() {
-  var sel = window.getSelection();
-  if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
-  if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hideMiniPalette(); return; }
-  if (isInsideHighlight(sel.anchorNode)) return;
-  var range = sel.getRangeAt(0);
-  showMiniPalette(range.getBoundingClientRect());
-}
-
 document.addEventListener('mouseup', function (e) {
   if (minipalette.contains(e.target)) return;
   if (isInsideHighlight(e.target)) return;
-  setTimeout(tryShowPaletteFromSelection, 0);
+  setTimeout(function () {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
+    if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hideMiniPalette(); return; }
+    var p = sel.anchorNode.parentNode;
+    if (p && p.closest && p.closest('mark[data-hl-id]')) return;
+    var range = sel.getRangeAt(0);
+    showMiniPalette(range.getBoundingClientRect());
+  }, 0);
 });
 
 document.addEventListener('touchend', function (e) {
   if (minipalette.contains(e.target)) return;
   if (isInsideHighlight(e.target)) return;
-  setTimeout(tryShowPaletteFromSelection, 300);
+  setTimeout(function () {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
+    if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hideMiniPalette(); return; }
+    var p = sel.anchorNode.parentNode;
+    if (p && p.closest && p.closest('mark[data-hl-id]')) return;
+    var range = sel.getRangeAt(0);
+    showMiniPalette(range.getBoundingClientRect());
+  }, 300);
 }, { passive: true });
 
 document.addEventListener('pointerdown', function (e) {
@@ -1193,6 +1195,7 @@ window.addEventListener('scroll', function () {
   hideMiniPalette();
 }, { passive: true });
 
+/* Mini palette buttons */
 minipalette.querySelectorAll('button[data-color]').forEach(function (btn) {
   btn.addEventListener('pointerdown', function (e) {
     e.preventDefault();
@@ -1210,9 +1213,11 @@ minipalette.querySelectorAll('button[data-color]').forEach(function (btn) {
   });
 });
 
-/* Tapping an existing highlight gives a one-time hint */
+/* Tapping a highlight does nothing special — no more popup/bar fights.
+   (We still allow the flash animation on tap for feedback.) */
 work.addEventListener('click', function (e) {
   if (isInsideHighlight(e.target)) {
+    // Show a small hint only the first time
     if (!window.__hinted__) {
       window.__hinted__ = true;
       showToast('Edit highlights from the 📝 panel');
@@ -1398,6 +1403,7 @@ tabs.forEach(function (t) {
   t.addEventListener('click', function () { switchTab(t.dataset.tab); });
 });
 
+/* ---- Sidebar cards ---- */
 function renderAnnotationsList() {
   var highlights = annotations.filter(function (a) { return a.type === 'highlight'; });
   var notes = annotations.filter(function (a) { return a.type === 'note'; });
@@ -1421,9 +1427,11 @@ function renderAnnotationsList() {
     var card = document.createElement('div');
     card.className = 'card';
 
+    // Quote (tap to jump)
     var quoteDiv = document.createElement('div');
     quoteDiv.className = 'quote';
-    quoteDiv.textContent = a.quote.length > 220 ? a.quote.slice(0, 220) + '…' : a.quote;
+    var quote = a.quote.length > 220 ? a.quote.slice(0, 220) + '…' : a.quote;
+    quoteDiv.textContent = quote;
     quoteDiv.addEventListener('click', function () {
       var mark = work.querySelector('mark[data-hl-id="' + a.id + '"]');
       if (mark) {
@@ -1436,6 +1444,7 @@ function renderAnnotationsList() {
     });
     card.appendChild(quoteDiv);
 
+    // Note body (if any)
     if (a.body) {
       var bodyDiv = document.createElement('div');
       bodyDiv.className = 'body';
@@ -1443,6 +1452,7 @@ function renderAnnotationsList() {
       card.appendChild(bodyDiv);
     }
 
+    // Color swatches
     var swatchRow = document.createElement('div');
     swatchRow.className = 'card-swatches';
     ['yellow','green','blue','purple','pink'].forEach(function (c) {
@@ -1457,6 +1467,7 @@ function renderAnnotationsList() {
     });
     card.appendChild(swatchRow);
 
+    // Actions
     var actions = document.createElement('div');
     actions.className = 'card-actions';
 
@@ -1474,6 +1485,7 @@ function renderAnnotationsList() {
 
     card.appendChild(actions);
 
+    // Inline note editor (hidden until Add/Edit note is tapped)
     var editor = document.createElement('div');
     editor.className = 'note-editor';
 
@@ -1663,7 +1675,7 @@ function fallbackCopy(text) {
   document.body.appendChild(ta);
   ta.select();
   try { document.execCommand('copy'); showToast('Markdown copied'); }
-  catch (e) { showToast('Could not copy — try Export instead'); }
+  catch (e) { showToast('Could not copy'); }
   document.body.removeChild(ta);
 }
 
