@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +31,6 @@ html, body {
   flex-direction: column;
 }
 
-/* ============================================================
-   Toolbar — compact, wraps on narrow screens
-   ============================================================ */
 #toolbar {
   background: #7f7666;
   background-image: linear-gradient(#8f8574, #6f6658);
@@ -70,12 +68,6 @@ html, body {
 #toolbar button:hover:not(:disabled) { background: #bbb5aa; }
 #toolbar button:active:not(:disabled) { background: #a8a297; }
 #toolbar button:disabled { opacity: 0.45; cursor: default; }
-#toolbar input[type="range"] {
-  background: #c6c1b8;
-  border: 1.5px solid #7f7666;
-  border-radius: 5px;
-  padding: 3px 6px;
-}
 #toolbar select {
   background: #c6c1b8;
   border: 1.5px solid #7f7666;
@@ -83,16 +75,6 @@ html, body {
   padding: 8px 8px;
   min-height: 40px;
   max-width: 46vw;
-}
-#toolbar .brand {
-  font-family: Georgia, serif;
-  font-weight: bold;
-  font-size: 1em;
-  color: #f4ecd8;
-  text-shadow: 1px 1px 0 #4a4339;
-  margin-right: 4px;
-  letter-spacing: 0.5px;
-  display: none; /* hidden on phone to save space */
 }
 #toolbar .spacer { flex: 1; min-width: 0; }
 #fontsize-val {
@@ -109,26 +91,8 @@ html, body {
   flex: 1 1 100%;
   order: 10;
 }
-#chapter-nav select {
-  flex: 1;
-  min-width: 0;
-  max-width: none;
-}
-#chapter-nav button {
-  padding: 8px 12px;
-  min-width: 40px;
-}
-
-/* Compact toggle for size and line */
-#toolbar .compact {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-#toolbar .compact button {
-  padding: 6px 10px;
-  min-height: 36px;
-}
+#chapter-nav select { flex: 1; min-width: 0; max-width: none; }
+#chapter-nav button { padding: 8px 12px; min-width: 40px; }
 
 #main {
   flex: 1;
@@ -165,14 +129,10 @@ html, body {
 }
 #work img { max-width: 100%; height: auto; }
 #work a { color: #702510; }
+#work a.broken-link { color: #93756c; text-decoration: line-through; cursor: not-allowed; }
 #work hr { border: none; border-top: 1px solid #b6af9c; margin: 1.5em 0; }
-#work pre, #work code {
-  overflow-x: auto;
-  max-width: 100%;
-  font-size: 0.9em;
-}
+#work pre, #work code { overflow-x: auto; max-width: 100%; font-size: 0.9em; }
 
-/* Highlights */
 mark.hl-yellow { background-color: #ffe28a !important; color: inherit; }
 mark.hl-green  { background-color: #b8e0b8 !important; color: inherit; }
 mark.hl-pink   { background-color: #f4b8d0 !important; color: inherit; }
@@ -184,8 +144,6 @@ mark[data-hl-id] {
   padding: 0;
   border: none;
   border-radius: 0;
-  cursor: pointer;
-  transition: filter 0.12s;
 }
 mark[data-hl-id].has-note {
   box-shadow: inset 3px 0 0 rgba(112, 37, 16, 0.55);
@@ -197,7 +155,6 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   50%      { box-shadow: 0 0 0 6px rgba(112,37,16,0.5); }
 }
 
-/* Welcome screen */
 #welcome {
   width: 100%;
   max-width: 46em;
@@ -238,53 +195,33 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
 }
 #welcome button:active { background: #a8a297; }
 
-/* Selection popup — larger touch targets */
-#popup {
+/* Mini palette — appears once after selection, gone after one tap */
+#minipalette {
   position: absolute;
   display: none;
   background: #faf6ec;
   border: 1.5px solid #7f7666;
-  border-radius: 7.5px;
+  border-radius: 999px;
   box-shadow: 0 3px 14px rgba(0,0,0,0.35);
-  padding: 8px;
+  padding: 6px 10px;
   gap: 8px;
   z-index: 200;
   align-items: center;
-  flex-wrap: wrap;
-  max-width: calc(100vw - 20px);
 }
-#popup .swatch {
-  width: 32px; height: 32px;
+#minipalette.show { display: flex; }
+#minipalette .swatch {
+  width: 34px; height: 34px;
   border-radius: 50%;
   border: 1.5px solid #7f7666;
   cursor: pointer;
   padding: 0;
 }
-#popup .swatch.active {
-  box-shadow: 0 0 0 2px #702510;
-}
-#popup .s-yellow { background: #ffe28a; }
-#popup .s-green  { background: #b8e0b8; }
-#popup .s-pink   { background: #f4b8d0; }
-#popup .s-blue   { background: #a8cbe8; }
-#popup .s-purple { background: #c9b8e0; }
-#popup button.text {
-  background: #c6c1b8;
-  border: 1.5px solid #7f7666;
-  border-radius: 6px;
-  box-shadow: inset 0 0 5px #7f7666;
-  padding: 8px 12px;
-  min-height: 36px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-  color: #39352d;
-  font-family: inherit;
-  touch-action: manipulation;
-}
-#popup .sep { width: 1px; height: 26px; background: #b6af9c; }
+#minipalette .s-yellow { background: #ffe28a; }
+#minipalette .s-green  { background: #b8e0b8; }
+#minipalette .s-pink   { background: #f4b8d0; }
+#minipalette .s-blue   { background: #a8cbe8; }
+#minipalette .s-purple { background: #c9b8e0; }
 
-/* Sidebar — full width on phone */
 #sidebar {
   position: fixed;
   top: 0; right: 0; bottom: 0;
@@ -376,6 +313,7 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
 }
 #sidebar .export-bar button:disabled { opacity: 0.45; cursor: default; }
 #notes-list { flex: 1; overflow-y: auto; padding: 14px; }
+
 .card {
   background: #faf6ec;
   border: 1.5px solid #7f7666;
@@ -385,48 +323,125 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   margin-bottom: 12px;
   font-size: 14px;
   color: #39352d;
-  cursor: pointer;
 }
 .card .quote {
   color: #702510;
   font-style: italic;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   padding-left: 8px;
   border-left: 3px solid #a8918a;
   white-space: pre-wrap;
   word-break: break-word;
+  cursor: pointer;
 }
-.card .body { white-space: pre-wrap; word-wrap: break-word; margin-bottom: 8px; }
-.card .actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11px;
+.card .quote:active { background: #f2ecdd; }
+.card .body {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom: 8px;
+  color: #39352d;
+}
+.card .body.empty {
   color: #93756c;
+  font-style: italic;
+}
+.card .card-swatches {
+  display: flex;
   gap: 8px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
-.card .actions button {
-  background: transparent;
-  border: 1px solid #b398b3;
-  color: #702510;
-  border-radius: 4px;
-  padding: 6px 10px;
-  min-height: 32px;
-  font-size: 12px;
+.card .card-swatches .swatch {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid #7f7666;
   cursor: pointer;
-  margin-left: 4px;
+  padding: 0;
+  touch-action: manipulation;
+}
+.card .card-swatches .swatch.active {
+  box-shadow: 0 0 0 2px #702510;
+}
+.card .card-swatches .s-yellow { background: #ffe28a; }
+.card .card-swatches .s-green  { background: #b8e0b8; }
+.card .card-swatches .s-pink   { background: #f4b8d0; }
+.card .card-swatches .s-blue   { background: #a8cbe8; }
+.card .card-swatches .s-purple { background: #c9b8e0; }
+
+.card .card-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.card .card-actions button {
+  flex: 1;
+  min-width: 80px;
+  background: #c6c1b8;
+  border: 1.5px solid #7f7666;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px #7f7666;
+  padding: 8px 10px;
+  min-height: 40px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #39352d;
   font-family: inherit;
   touch-action: manipulation;
 }
-.card .color-dot {
-  display: inline-block;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 1px solid #7f7666;
-  vertical-align: middle;
-  margin-right: 5px;
+.card .card-actions button:active { background: #a8a297; }
+.card .card-actions button.danger {
+  color: #702510;
+  border-color: #916e6e;
 }
+
+.card .note-editor {
+  display: none;
+  margin-top: 10px;
+}
+.card .note-editor.open { display: block; }
+.card .note-editor textarea {
+  width: 100%;
+  min-height: 100px;
+  background: #f2ecdd;
+  border: 1.5px solid #7f7666;
+  border-radius: 6px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #39352d;
+  resize: vertical;
+}
+.card .note-editor textarea:focus {
+  outline: none;
+  background: #faf6ec;
+  border-color: #702510;
+}
+.card .note-editor .editor-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+.card .note-editor .editor-actions button {
+  background: #c6c1b8;
+  border: 1.5px solid #7f7666;
+  border-radius: 6px;
+  box-shadow: inset 0 0 5px #7f7666;
+  padding: 8px 16px;
+  min-height: 40px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: #39352d;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+.card .note-editor .editor-actions button.primary {
+  background: #a8cbe8;
+  border-color: #7f7666;
+}
+
 #notes-empty {
   color: #93756c;
   font-size: 14px;
@@ -434,72 +449,6 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
   padding: 30px 14px;
   font-style: italic;
 }
-
-/* Modal — full width on phone */
-#modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(74,51,28,0.5);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 300;
-  padding: 16px;
-}
-#modal-backdrop.open { display: flex; }
-#modal {
-  background: #faf6ec;
-  border: 2px solid #7f7666;
-  border-radius: 7.5px;
-  box-shadow: 0 6px 30px rgba(0,0,0,0.5);
-  padding: 20px;
-  max-width: 480px;
-  width: 100%;
-  max-height: calc(100vh - 32px);
-  overflow-y: auto;
-  color: #39352d;
-}
-#modal h4 { margin: 0 0 12px; color: #4a331c; font-family: Georgia, serif; }
-#modal .quote-preview {
-  background: #f2ecdd;
-  border-left: 3px solid #a8918a;
-  padding: 8px 10px;
-  font-size: 12px;
-  font-style: italic;
-  color: #702510;
-  max-height: 100px;
-  overflow-y: auto;
-  margin-bottom: 12px;
-  white-space: pre-wrap;
-}
-#modal textarea {
-  width: 100%;
-  min-height: 120px;
-  background: #f2ecdd;
-  border: 1.5px solid #7f7666;
-  border-radius: 6px;
-  padding: 10px;
-  font-family: inherit;
-  font-size: 16px;
-  color: #39352d;
-  resize: vertical;
-}
-#modal textarea:focus { outline: none; background: #faf6ec; border-color: #702510; }
-#modal .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; flex-wrap: wrap; }
-#modal button {
-  background: #c6c1b8;
-  border: 1.5px solid #7f7666;
-  border-radius: 6px;
-  box-shadow: inset 0 0 7px #7f7666;
-  padding: 10px 20px;
-  min-height: 48px;
-  cursor: pointer;
-  font-weight: 600;
-  color: #39352d;
-  font-family: inherit;
-  touch-action: manipulation;
-}
-#modal button.danger { color: #702510; border-color: #916e6e; }
 
 #toast {
   position: fixed;
@@ -521,18 +470,14 @@ mark[data-hl-id].flash { animation: flashPulse 1s ease-out; }
 }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* Font enforcement */
 #work,
 #work *:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
   font-family: var(--book-font) !important;
 }
-#work p {
-  margin: 0 0 1.2em !important;
-}
+#work p { margin: 0 0 1.2em !important; }
 #work div > p:last-child { margin-bottom: 0 !important; }
 #work img, #work figure { margin: 1em 0; }
 
-/* Dark mode */
 body.theme-dark { background: #1a1714; color: #c9bfae; }
 body.theme-dark #outer.wrapper { background: #1a1714; filter: none; }
 body.theme-dark #toolbar {
@@ -548,8 +493,7 @@ body.theme-dark #toolbar button {
   box-shadow: inset 0 0 7px #1a1614;
 }
 body.theme-dark #toolbar button:hover:not(:disabled) { background: #4a4138; }
-body.theme-dark #toolbar select,
-body.theme-dark #toolbar input[type="range"] {
+body.theme-dark #toolbar select {
   background: #3a332c;
   border-color: #1a1614;
   color: #d8c7a8;
@@ -569,6 +513,7 @@ body.theme-dark #work blockquote {
   color: #b3a68f;
 }
 body.theme-dark #work a { color: #d99a72; }
+body.theme-dark #work a.broken-link { color: #6a6258; }
 body.theme-dark #work hr { border-top-color: #3a332c; }
 body.theme-dark #welcome {
   background: #221d19;
@@ -587,21 +532,13 @@ body.theme-dark #welcome button {
   color: #d8c7a8;
   box-shadow: inset 0 0 7px #1a1614;
 }
-body.theme-dark #popup {
+body.theme-dark #minipalette {
   background: #2a2420;
   border-color: #3a332c;
   box-shadow: 0 3px 14px rgba(0,0,0,0.7);
 }
-body.theme-dark #popup button.text {
-  background: #3a332c;
-  border-color: #1a1614;
-  color: #d8c7a8;
-  box-shadow: inset 0 0 5px #1a1614;
-}
-body.theme-dark #popup .sep { background: #3a332c; }
 body.theme-dark #sidebar {
   background: #1a1714;
-  border-left-color: #3a332c;
   box-shadow: -4px 0 16px rgba(0,0,0,0.7);
 }
 body.theme-dark #sidebar h3 {
@@ -639,61 +576,52 @@ body.theme-dark .card .quote {
   color: #d99a72;
   border-left-color: #4a4138;
 }
-body.theme-dark .card .actions button {
-  border-color: #4a4138;
-  color: #d99a72;
-}
-body.theme-dark #notes-empty { color: #7a6f5e; }
-body.theme-dark #modal {
-  background: #221d19;
-  border-color: #3a332c;
-  color: #c9bfae;
-}
-body.theme-dark #modal h4 { color: #d8c7a8; }
-body.theme-dark #modal .quote-preview {
-  background: #2a2420;
-  border-left-color: #4a4138;
-  color: #d99a72;
-}
-body.theme-dark #modal textarea {
-  background: #2a2420;
-  border-color: #3a332c;
-  color: #c9bfae;
-}
-body.theme-dark #modal textarea:focus {
-  background: #221d19;
-  border-color: #d99a72;
-}
-body.theme-dark #modal button {
+body.theme-dark .card .quote:active { background: #3a332c; }
+body.theme-dark .card .body { color: #c9bfae; }
+body.theme-dark .card .body.empty { color: #7a6f5e; }
+body.theme-dark .card .card-actions button {
   background: #3a332c;
   border-color: #1a1614;
   color: #d8c7a8;
-  box-shadow: inset 0 0 7px #1a1614;
+  box-shadow: inset 0 0 5px #1a1614;
 }
+body.theme-dark .card .card-actions button.danger {
+  color: #d99a72;
+  border-color: #4a4138;
+}
+body.theme-dark .card .note-editor textarea {
+  background: #221d19;
+  border-color: #3a332c;
+  color: #c9bfae;
+}
+body.theme-dark .card .note-editor textarea:focus {
+  background: #2a2420;
+  border-color: #d99a72;
+}
+body.theme-dark .card .note-editor .editor-actions button {
+  background: #3a332c;
+  border-color: #1a1614;
+  color: #d8c7a8;
+  box-shadow: inset 0 0 5px #1a1614;
+}
+body.theme-dark .card .note-editor .editor-actions button.primary {
+  background: #2a4a6b;
+  color: #dceaf8;
+}
+body.theme-dark #notes-empty { color: #7a6f5e; }
 body.theme-dark mark.hl-yellow { background-color: #6b5c2a !important; color: #f0e4c8; }
 body.theme-dark mark.hl-green  { background-color: #3a5a3a !important; color: #e0f0dc; }
 body.theme-dark mark.hl-pink   { background-color: #6b3a4f !important; color: #f8e0e8; }
 body.theme-dark mark.hl-blue   { background-color: #2a4a6b !important; color: #dceaf8; }
 body.theme-dark mark.hl-purple { background-color: #4a3a6b !important; color: #e8dcf8; }
 
-/* Larger phones / tablets — bring back some breathing room */
 @media (min-width: 600px) {
-  #toolbar .brand { display: inline; }
   #main { padding: 24px 16px 60px; }
   #work { padding: 40px 40px; }
-  #sidebar {
-    width: 380px;
-    max-width: 90vw;
-    border-left: 2px solid #7f7666;
-  }
+  #sidebar { width: 380px; max-width: 90vw; border-left: 2px solid #7f7666; }
   #chapter-nav { order: initial; flex: 0 1 auto; }
 }
 </style>
-    <meta name="theme-color" content="#7f7666">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
@@ -728,14 +656,12 @@ body.theme-dark mark.hl-purple { background-color: #4a3a6b !important; color: #e
   </div>
 </div>
 
-<div id="popup">
+<div id="minipalette">
   <button class="swatch s-yellow" data-color="yellow" title="Yellow"></button>
   <button class="swatch s-green"  data-color="green"  title="Green"></button>
   <button class="swatch s-pink"   data-color="pink"   title="Pink"></button>
   <button class="swatch s-blue"   data-color="blue"   title="Blue"></button>
   <button class="swatch s-purple" data-color="purple" title="Purple"></button>
-  <button class="text" data-act="note">📝</button>
-  <button class="text" data-act="clear">✕</button>
 </div>
 
 <aside id="sidebar">
@@ -752,19 +678,6 @@ body.theme-dark mark.hl-purple { background-color: #4a3a6b !important; color: #e
   <div id="notes-list"></div>
 </aside>
 
-<div id="modal-backdrop">
-  <div id="modal">
-    <h4 id="modal-title">Add note</h4>
-    <div class="quote-preview" id="modal-quote"></div>
-    <textarea id="modal-body" placeholder="Write your note…"></textarea>
-    <div class="modal-actions">
-      <button id="modal-delete" class="danger" style="display:none">Delete</button>
-      <button id="modal-cancel">Cancel</button>
-      <button id="modal-save">Save</button>
-    </div>
-  </div>
-</div>
-
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js"></script>
@@ -774,7 +687,7 @@ body.theme-dark mark.hl-purple { background-color: #4a3a6b !important; color: #e
 
 var work = document.getElementById('work');
 var welcome = document.getElementById('welcome');
-var popup = document.getElementById('popup');
+var minipalette = document.getElementById('minipalette');
 var notesList = document.getElementById('notes-list');
 var noteCount = document.getElementById('noteCount');
 var sidebar = document.getElementById('sidebar');
@@ -790,11 +703,9 @@ var themeBtn = document.getElementById('themeBtn');
 var currentFileKey = null;
 var currentFileName = '';
 var annotations = [];
-var savedRange = null;
 var activeTab = 'highlights';
 var currentText = '';
 var scrollSaveTimer = null;
-var popupTargetAnnoId = null;
 var chapters = [];
 var scrollSaveEnabled = false;
 
@@ -813,7 +724,6 @@ function showToast(msg) {
   toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
 }
 
-/* Prefs */
 var sizeUp = document.getElementById('sizeUp');
 var sizeDown = document.getElementById('sizeDown');
 var fontSizeVal = document.getElementById('fontsize-val');
@@ -837,7 +747,6 @@ sizeUp.addEventListener('click', function () { prefSize = Math.min(250, prefSize
 sizeDown.addEventListener('click', function () { prefSize = Math.max(50, prefSize - 10); applyPrefs(true); });
 loadPrefs();
 
-/* Theme */
 function applyTheme(save) {
   var dark = document.body.classList.contains('theme-dark');
   themeBtn.textContent = dark ? '☀' : '🌙';
@@ -859,7 +768,6 @@ themeBtn.addEventListener('click', function () {
 });
 loadTheme();
 
-/* File loading */
 function openFilePicker() { document.getElementById('fileInput').click(); }
 document.getElementById('openBtn').addEventListener('click', openFilePicker);
 document.getElementById('openBtn2').addEventListener('click', openFilePicker);
@@ -880,7 +788,6 @@ function loadFile(file) {
   flushScroll();
   currentFileName = file.name;
   var name = file.name.toLowerCase();
-
   if (name.endsWith('.epub')) {
     loadEpub(file);
   } else {
@@ -895,7 +802,6 @@ function loadFile(file) {
   }
 }
 
-/* EPUB */
 function loadEpub(file) {
   var r = new FileReader();
   r.onload = function (e) {
@@ -915,18 +821,15 @@ function loadEpub(file) {
 function renderEpub(files, name) {
   var containerBytes = files['META-INF/container.xml'];
   if (!containerBytes) throw new Error('Not a valid EPUB: missing META-INF/container.xml');
-
   var containerXml = fflate.strFromU8(containerBytes);
   var containerDoc = new DOMParser().parseFromString(containerXml, 'application/xml');
   var rootfileEl = containerDoc.querySelector('rootfile');
   if (!rootfileEl) throw new Error('Not a valid EPUB: missing rootfile');
   var opfPath = rootfileEl.getAttribute('full-path');
-
   var opfBytes = files[opfPath];
   if (!opfBytes) throw new Error('Missing OPF file: ' + opfPath);
   var opfXml = fflate.strFromU8(opfBytes);
   var opfDoc = new DOMParser().parseFromString(opfXml, 'application/xml');
-
   var opfDir = opfPath.indexOf('/') >= 0 ? opfPath.slice(0, opfPath.lastIndexOf('/') + 1) : '';
 
   var manifest = {};
@@ -936,7 +839,6 @@ function renderEpub(files, name) {
       mediaType: item.getAttribute('media-type') || ''
     };
   });
-
   var spine = [];
   opfDoc.querySelectorAll('spine > itemref').forEach(function (ref) {
     var idref = ref.getAttribute('idref');
@@ -970,14 +872,10 @@ function renderEpub(files, name) {
   });
 
   var combined = '<div class="epub-root">' + pieces.join('\n<hr>\n') + '</div>';
-
   var titleEl = opfDoc.querySelector('metadata > title, dc\\:title, title');
   var title = titleEl ? (titleEl.textContent || '').trim() : '';
   if (!title && name) title = name.replace(/\.epub$/i, '');
-  if (title) {
-    combined = '<h1>' + escapeHtml(title) + '</h1>\n' + combined;
-  }
-
+  if (title) combined = '<h1>' + escapeHtml(title) + '</h1>\n' + combined;
   renderBook(combined);
 }
 
@@ -1033,6 +931,34 @@ function escapeHtml(s) {
   });
 }
 
+function processLinks(root) {
+  var links = root.querySelectorAll('a[href]');
+  links.forEach(function (a) {
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('#') === 0) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var id = href.slice(1);
+        var target = root.querySelector('[id="' + id.replace(/"/g, '\\"') + '"]') ||
+                     root.querySelector('[name="' + id.replace(/"/g, '\\"') + '"]');
+        if (target) {
+          var top = target.getBoundingClientRect().top + window.scrollY - toolbar.offsetHeight - 16;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    } else if (/^https?:\/\//i.test(href)) {
+      a.setAttribute('target', '_blank');
+      a.setAttribute('rel', 'noopener noreferrer');
+    } else {
+      a.classList.add('broken-link');
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        showToast('File links are not supported when reading from a file picker.');
+      });
+    }
+  });
+}
+
 function renderBook(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   doc.querySelectorAll('script').forEach(function (s) { s.remove(); });
@@ -1057,6 +983,7 @@ function renderBook(html) {
   content.innerHTML = doc.body ? doc.body.innerHTML : html;
   work.appendChild(content);
 
+  processLinks(content);
   currentText = content.textContent || '';
 
   welcome.style.display = 'none';
@@ -1087,25 +1014,18 @@ function buildChapters() {
   chapters = [];
   var headings = work.querySelectorAll('#work-content h1, #work-content h2, #work-content h3');
   chapterSel.innerHTML = '';
-
-  if (!headings.length) {
-    chapterNav.style.display = 'none';
-    return;
-  }
-
+  if (!headings.length) { chapterNav.style.display = 'none'; return; }
   headings.forEach(function (h, idx) {
     if (!h.id) h.id = 'chapter-' + idx;
     var title = (h.textContent || '').trim().replace(/\s+/g, ' ');
     if (title.length > 40) title = title.slice(0, 37) + '…';
     if (!title) title = 'Chapter ' + (idx + 1);
     chapters.push({ id: h.id, title: title, el: h });
-
     var opt = document.createElement('option');
     opt.value = h.id;
     opt.textContent = title;
     chapterSel.appendChild(opt);
   });
-
   chapterNav.style.display = 'flex';
   updateActiveChapter();
 }
@@ -1212,160 +1132,125 @@ function pointToOffset(map, node, localOffset) {
   return -1;
 }
 
-/* On touch devices, use selectionchange + touchend since mouseup isn't reliable */
-function handleSelection() {
-  if (popup.contains(document.activeElement)) return;
+/* ---- Selection detection ---- */
+function isInsideHighlight(target) {
+  var node = target;
+  while (node && node !== document) {
+    if (node.nodeType === 1 && node.tagName === 'MARK' && node.dataset.hlId) return true;
+    node = node.parentNode;
+  }
+  return false;
+}
 
-  var sel = window.getSelection();
-  if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hidePopup(); return; }
-  if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hidePopup(); return; }
-  if (sel.anchorNode.parentNode && sel.anchorNode.parentNode.closest &&
-      sel.anchorNode.parentNode.closest('mark[data-hl-id]')) return;
+function hideMiniPalette() {
+  minipalette.classList.remove('show');
+}
 
-  var range = sel.getRangeAt(0);
-  savedRange = range.cloneRange();
-  popupTargetAnnoId = null;
-  updatePopupButtons();
-  showPopupAt(range);
+function showMiniPalette(rect) {
+  var pw = minipalette.offsetWidth;
+  var ph = minipalette.offsetHeight;
+  var left = window.scrollX + rect.left + rect.width / 2 - pw / 2;
+  var top = window.scrollY + rect.top - ph - 8;
+  left = Math.max(8, Math.min(left, window.scrollX + document.documentElement.clientWidth - pw - 8));
+  if (top < window.scrollY + 4) top = window.scrollY + rect.bottom + 8;
+  minipalette.style.left = left + 'px';
+  minipalette.style.top = top + 'px';
+  minipalette.classList.add('show');
 }
 
 document.addEventListener('mouseup', function (e) {
-  if (popup.contains(e.target)) return;
-  if (e.target.closest && e.target.closest('mark[data-hl-id]')) return;
-  setTimeout(handleSelection, 0);
+  if (minipalette.contains(e.target)) return;
+  if (isInsideHighlight(e.target)) return;
+  setTimeout(function () {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
+    if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hideMiniPalette(); return; }
+    var p = sel.anchorNode.parentNode;
+    if (p && p.closest && p.closest('mark[data-hl-id]')) return;
+    var range = sel.getRangeAt(0);
+    showMiniPalette(range.getBoundingClientRect());
+  }, 0);
 });
 
 document.addEventListener('touchend', function (e) {
-  if (popup.contains(e.target)) return;
-  if (e.target.closest && e.target.closest('mark[data-hl-id]')) return;
-  // Delay so mobile selection has time to settle
-  setTimeout(handleSelection, 200);
+  if (minipalette.contains(e.target)) return;
+  if (isInsideHighlight(e.target)) return;
+  setTimeout(function () {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
+    if (!work.contains(sel.anchorNode) || !work.contains(sel.focusNode)) { hideMiniPalette(); return; }
+    var p = sel.anchorNode.parentNode;
+    if (p && p.closest && p.closest('mark[data-hl-id]')) return;
+    var range = sel.getRangeAt(0);
+    showMiniPalette(range.getBoundingClientRect());
+  }, 300);
 }, { passive: true });
 
-work.addEventListener('click', function (e) {
-  var mark = e.target.closest && e.target.closest('mark[data-hl-id]');
-  if (!mark) return;
-  e.stopPropagation();
-  onAnnotationClick(mark.dataset.hlId);
-});
+document.addEventListener('pointerdown', function (e) {
+  if (minipalette.contains(e.target)) return;
+  hideMiniPalette();
+}, { passive: true });
 
-function onAnnotationClick(id) {
-  var anno = findAnno(id);
-  if (!anno) return;
-  savedRange = null;
-  popupTargetAnnoId = id;
-  updatePopupButtons();
-  var mark = work.querySelector('mark[data-hl-id="' + id + '"]');
-  if (mark) showPopupAt(mark.getBoundingClientRect());
-}
+window.addEventListener('scroll', function () {
+  hideMiniPalette();
+}, { passive: true });
 
-function updatePopupButtons() {
-  var noteBtn = popup.querySelector('button[data-act="note"]');
-  var clearBtn = popup.querySelector('button[data-act="clear"]');
-  var swatches = popup.querySelectorAll('button[data-color]');
-  var sep = popup.querySelector('.sep');
-
-  if (popupTargetAnnoId) {
-    var anno = findAnno(popupTargetAnnoId);
-    noteBtn.textContent = (anno && anno.type === 'note') ? '📝' : '📝';
-    noteBtn.style.display = '';
-    clearBtn.style.display = '';
-    swatches.forEach(function (s) {
-      s.style.display = '';
-      s.classList.toggle('active', anno && s.dataset.color === anno.color);
-    });
-    if (sep) sep.style.display = '';
-  } else {
-    noteBtn.textContent = '📝';
-    noteBtn.style.display = '';
-    clearBtn.style.display = '';
-    swatches.forEach(function (s) {
-      s.style.display = '';
-      s.classList.remove('active');
-    });
-    if (sep) sep.style.display = '';
-  }
-}
-
-function showPopupAt(input) {
-  var rect;
-  if (input && typeof input.getBoundingClientRect === 'function') {
-    rect = input.getBoundingClientRect();
-  } else if (input && input.left !== undefined) {
-    rect = input;
-  } else {
-    return;
-  }
-  popup.style.display = 'flex';
-  var pw = popup.offsetWidth;
-  var ph = popup.offsetHeight;
-  var left = window.scrollX + rect.left + rect.width / 2 - pw / 2;
-  var top  = window.scrollY + rect.top - ph - 8;
-  left = Math.max(8, Math.min(left, window.scrollX + document.documentElement.clientWidth - pw - 8));
-  if (top < window.scrollY + 4) top = window.scrollY + rect.bottom + 8;
-  popup.style.left = left + 'px';
-  popup.style.top  = top + 'px';
-}
-function hidePopup() {
-  popup.style.display = 'none';
-  savedRange = null;
-  popupTargetAnnoId = null;
-}
-popup.addEventListener('touchstart', function (e) { e.preventDefault(); }, { passive: false });
-popup.addEventListener('mousedown', function (e) { e.preventDefault(); });
-
-popup.querySelectorAll('button[data-color]').forEach(function (btn) {
-  btn.addEventListener('click', function () {
+/* Mini palette buttons */
+minipalette.querySelectorAll('button[data-color]').forEach(function (btn) {
+  btn.addEventListener('pointerdown', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
     var color = btn.dataset.color;
-    if (popupTargetAnnoId) {
-      recolorAnnotation(popupTargetAnnoId, color);
-      hidePopup();
-      return;
-    }
-    if (!savedRange) return;
-    createAnnotation('highlight', color, savedRange, '');
-    hidePopup();
-    window.getSelection().removeAllRanges();
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || sel.rangeCount === 0) { hideMiniPalette(); return; }
+    var range = sel.getRangeAt(0);
+    createAnnotation('highlight', color, range, '');
+    hideMiniPalette();
+    try { sel.removeAllRanges(); } catch (er) {}
+  });
+  btn.addEventListener('click', function (e) {
+    if (e.defaultPrevented) return;
   });
 });
 
-popup.querySelector('button[data-act="note"]').addEventListener('click', function () {
-  if (popupTargetAnnoId) {
-    var anno = findAnno(popupTargetAnnoId);
-    var idForModal = popupTargetAnnoId;
-    hidePopup();
-    if (anno) {
-      if (anno.type === 'note') {
-        openNoteModal({ mode: 'edit', note: anno });
-      } else {
-        openNoteModal({ mode: 'edit', note: anno, attachToHighlight: true, annoId: idForModal });
-      }
+/* Tapping a highlight does nothing special — no more popup/bar fights.
+   (We still allow the flash animation on tap for feedback.) */
+work.addEventListener('click', function (e) {
+  if (isInsideHighlight(e.target)) {
+    // Show a small hint only the first time
+    if (!window.__hinted__) {
+      window.__hinted__ = true;
+      showToast('Edit highlights from the 📝 panel');
     }
-    return;
   }
-  if (!savedRange) return;
-  var quote = savedRange.toString();
-  var range = savedRange.cloneRange();
-  hidePopup();
-  window.getSelection().removeAllRanges();
-  openNoteModal({ mode: 'new', quote: quote, range: range });
 });
 
-popup.querySelector('button[data-act="clear"]').addEventListener('click', function () {
-  if (popupTargetAnnoId) {
-    var id = popupTargetAnnoId;
-    hidePopup();
-    var anno = findAnno(id);
-    if (confirm('Remove this highlight' + (anno && anno.type === 'note' ? ' and its note?' : '?'))) {
-      deleteAnnotation(id);
-    }
-    return;
+function findAnno(id) {
+  for (var i = 0; i < annotations.length; i++) {
+    if (annotations[i].id === id) return annotations[i];
   }
-  if (!savedRange) return;
-  clearInRange(savedRange);
-  hidePopup();
-  window.getSelection().removeAllRanges();
-});
+  return null;
+}
+
+function createAnnotation(type, color, range, body) {
+  var map = buildTextMap();
+  var start = pointToOffset(map, range.startContainer, range.startOffset);
+  var end = pointToOffset(map, range.endContainer, range.endOffset);
+  if (start < 0 || end < 0 || end <= start) return null;
+  var quote = range.toString();
+  var id = 'a' + Date.now() + Math.random().toString(36).slice(2, 7);
+  var anno = {
+    id: id, type: type, color: color || 'yellow',
+    quote: quote, body: body || '',
+    start: start, end: end,
+    createdAt: Date.now(), updatedAt: Date.now()
+  };
+  annotations.push(anno);
+  saveAnnotations();
+  renderAnnotationsList();
+  wrapRangeByOffsets(start, end, anno);
+  return anno;
+}
 
 function recolorAnnotation(id, newColor) {
   var anno = findAnno(id);
@@ -1385,46 +1270,43 @@ function recolorAnnotation(id, newColor) {
   });
 }
 
-function findAnno(id) {
-  for (var i = 0; i < annotations.length; i++) {
-    if (annotations[i].id === id) return annotations[i];
-  }
-  return null;
-}
-
-function createAnnotation(type, color, range, body) {
-  var map = buildTextMap();
-  var start = pointToOffset(map, range.startContainer, range.startOffset);
-  var end = pointToOffset(map, range.endContainer, range.endOffset);
-  if (start < 0 || end < 0 || end <= start) return null;
-
-  var quote = range.toString();
-
-  var id = 'a' + Date.now() + Math.random().toString(36).slice(2, 7);
-  var anno = {
-    id: id, type: type, color: color || 'yellow',
-    quote: quote, body: body || '',
-    start: start, end: end,
-    createdAt: Date.now(), updatedAt: Date.now()
-  };
-  annotations.push(anno);
-  saveAnnotations();
-  renderAnnotationsList();
-  wrapRangeByOffsets(start, end, anno);
-  return anno;
-}
-
-function attachNoteToHighlight(anno, body) {
-  anno.type = 'note';
+function setAnnotationNote(id, body) {
+  var anno = findAnno(id);
+  if (!anno) return;
   anno.body = body;
+  if (body) anno.type = 'note';
+  else if (anno.type === 'note') anno.type = 'highlight';
   anno.updatedAt = Date.now();
   saveAnnotations();
   renderAnnotationsList();
-  var marks = work.querySelectorAll('mark[data-hl-id="' + anno.id + '"]');
+  var marks = work.querySelectorAll('mark[data-hl-id="' + id + '"]');
   marks.forEach(function (mark) {
-    mark.classList.add('has-note');
-    mark.title = 'Note: ' + (body || '(empty)');
+    if (body) {
+      mark.classList.add('has-note');
+      mark.title = 'Note: ' + body;
+    } else {
+      mark.classList.remove('has-note');
+      mark.title = 'Highlight';
+    }
   });
+}
+
+function deleteAnnotation(id) {
+  annotations = annotations.filter(function (a) { return a.id !== id; });
+  saveAnnotations();
+  renderAnnotationsList();
+  var marks = Array.prototype.slice.call(
+    work.querySelectorAll('mark[data-hl-id="' + id + '"]')
+  );
+  marks.forEach(unwrapMark);
+}
+
+function unwrapMark(mark) {
+  var parent = mark.parentNode;
+  if (!parent) return;
+  while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+  parent.removeChild(mark);
+  parent.normalize();
 }
 
 function wrapRangeByOffsets(start, end, anno) {
@@ -1439,7 +1321,6 @@ function wrapRangeByOffsets(start, end, anno) {
 
   var root = range.commonAncestorContainer;
   if (root.nodeType === 3) root = root.parentNode;
-
   var startNode = range.startContainer;
   var startOffset = range.startOffset;
   var endNode = range.endContainer;
@@ -1493,44 +1374,6 @@ function flashMark(id) {
   });
 }
 
-function clearInRange(range) {
-  var marks = [];
-  var walker = document.createTreeWalker(work, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: function (n) {
-      return (n.tagName === 'MARK' && n.dataset.hlId && range.intersectsNode(n))
-        ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-    }
-  });
-  var n;
-  while ((n = walker.nextNode())) marks.push(n);
-  var idsToDelete = {};
-  marks.forEach(function (m) {
-    idsToDelete[m.dataset.hlId] = true;
-    unwrapMark(m);
-  });
-  annotations = annotations.filter(function (a) { return !idsToDelete[a.id]; });
-  saveAnnotations();
-  renderAnnotationsList();
-}
-
-function deleteAnnotation(id) {
-  annotations = annotations.filter(function (a) { return a.id !== id; });
-  saveAnnotations();
-  renderAnnotationsList();
-  var marks = Array.prototype.slice.call(
-    work.querySelectorAll('mark[data-hl-id="' + id + '"]')
-  );
-  marks.forEach(unwrapMark);
-}
-
-function unwrapMark(mark) {
-  var parent = mark.parentNode;
-  if (!parent) return;
-  while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
-  parent.removeChild(mark);
-  parent.normalize();
-}
-
 function loadAnnotationsForCurrentFile() {
   if (!currentFileKey) { annotations = []; renderAnnotationsList(); return; }
   try {
@@ -1560,6 +1403,7 @@ tabs.forEach(function (t) {
   t.addEventListener('click', function () { switchTab(t.dataset.tab); });
 });
 
+/* ---- Sidebar cards ---- */
 function renderAnnotationsList() {
   var highlights = annotations.filter(function (a) { return a.type === 'highlight'; });
   var notes = annotations.filter(function (a) { return a.type === 'note'; });
@@ -1574,7 +1418,7 @@ function renderAnnotationsList() {
     empty.id = 'notes-empty';
     empty.textContent = activeTab === 'highlights'
       ? 'Select text in the book and pick a color to highlight it.'
-      : 'Select text and tap 📝 to add a note.';
+      : 'Tap "Add note" on a highlight to attach a note.';
     notesList.appendChild(empty);
     return;
   }
@@ -1582,64 +1426,13 @@ function renderAnnotationsList() {
   list.forEach(function (a) {
     var card = document.createElement('div');
     card.className = 'card';
-    var hex = COLOR_HEX[a.color] || '#ddd';
-    var quote = a.quote.length > 180 ? a.quote.slice(0, 180) + '…' : a.quote;
 
+    // Quote (tap to jump)
     var quoteDiv = document.createElement('div');
     quoteDiv.className = 'quote';
-    var dot = document.createElement('span');
-    dot.className = 'color-dot';
-    dot.style.background = hex;
-    quoteDiv.appendChild(dot);
-    quoteDiv.appendChild(document.createTextNode(quote));
-    card.appendChild(quoteDiv);
-
-    if (a.body) {
-      var bodyDiv = document.createElement('div');
-      bodyDiv.className = 'body';
-      bodyDiv.textContent = a.body;
-      card.appendChild(bodyDiv);
-    }
-
-    var actions = document.createElement('div');
-    actions.className = 'actions';
-
-    var timeSpan = document.createElement('span');
-    timeSpan.textContent = new Date(a.updatedAt || a.createdAt).toLocaleDateString();
-    actions.appendChild(timeSpan);
-
-    var btnSpan = document.createElement('span');
-
-    if (a.type === 'note') {
-      var editBtn = document.createElement('button');
-      editBtn.textContent = 'Edit';
-      editBtn.addEventListener('click', function (ev) {
-        ev.stopPropagation();
-        openNoteModal({ mode: 'edit', note: a });
-      });
-      btnSpan.appendChild(editBtn);
-    } else {
-      var addNoteBtn = document.createElement('button');
-      addNoteBtn.textContent = 'Note';
-      addNoteBtn.addEventListener('click', function (ev) {
-        ev.stopPropagation();
-        openNoteModal({ mode: 'edit', note: a, attachToHighlight: true, annoId: a.id });
-      });
-      btnSpan.appendChild(addNoteBtn);
-    }
-
-    var delBtn = document.createElement('button');
-    delBtn.textContent = 'Delete';
-    delBtn.addEventListener('click', function (ev) {
-      ev.stopPropagation();
-      if (confirm('Delete this?')) deleteAnnotation(a.id);
-    });
-    btnSpan.appendChild(delBtn);
-
-    actions.appendChild(btnSpan);
-    card.appendChild(actions);
-
-    card.addEventListener('click', function () {
+    var quote = a.quote.length > 220 ? a.quote.slice(0, 220) + '…' : a.quote;
+    quoteDiv.textContent = quote;
+    quoteDiv.addEventListener('click', function () {
       var mark = work.querySelector('mark[data-hl-id="' + a.id + '"]');
       if (mark) {
         sidebar.classList.remove('open');
@@ -1647,6 +1440,86 @@ function renderAnnotationsList() {
           mark.scrollIntoView({ behavior: 'smooth', block: 'center' });
           flashMark(a.id);
         }, 200);
+      }
+    });
+    card.appendChild(quoteDiv);
+
+    // Note body (if any)
+    if (a.body) {
+      var bodyDiv = document.createElement('div');
+      bodyDiv.className = 'body';
+      bodyDiv.textContent = a.body;
+      card.appendChild(bodyDiv);
+    }
+
+    // Color swatches
+    var swatchRow = document.createElement('div');
+    swatchRow.className = 'card-swatches';
+    ['yellow','green','blue','purple','pink'].forEach(function (c) {
+      var sw = document.createElement('button');
+      sw.className = 'swatch s-' + c;
+      if (a.color === c) sw.classList.add('active');
+      sw.title = c;
+      sw.addEventListener('click', function () {
+        recolorAnnotation(a.id, c);
+      });
+      swatchRow.appendChild(sw);
+    });
+    card.appendChild(swatchRow);
+
+    // Actions
+    var actions = document.createElement('div');
+    actions.className = 'card-actions';
+
+    var noteBtn = document.createElement('button');
+    noteBtn.textContent = a.body ? 'Edit note' : 'Add note';
+    actions.appendChild(noteBtn);
+
+    var delBtn = document.createElement('button');
+    delBtn.className = 'danger';
+    delBtn.textContent = 'Delete';
+    delBtn.addEventListener('click', function () {
+      if (confirm('Delete this highlight?')) deleteAnnotation(a.id);
+    });
+    actions.appendChild(delBtn);
+
+    card.appendChild(actions);
+
+    // Inline note editor (hidden until Add/Edit note is tapped)
+    var editor = document.createElement('div');
+    editor.className = 'note-editor';
+
+    var ta = document.createElement('textarea');
+    ta.placeholder = 'Write your note…';
+    ta.value = a.body || '';
+    editor.appendChild(ta);
+
+    var editorActions = document.createElement('div');
+    editorActions.className = 'editor-actions';
+
+    var cancelBtn = document.createElement('button');
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.addEventListener('click', function () {
+      editor.classList.remove('open');
+    });
+    editorActions.appendChild(cancelBtn);
+
+    var saveBtn = document.createElement('button');
+    saveBtn.className = 'primary';
+    saveBtn.textContent = 'Save';
+    saveBtn.addEventListener('click', function () {
+      setAnnotationNote(a.id, ta.value.trim());
+      editor.classList.remove('open');
+    });
+    editorActions.appendChild(saveBtn);
+
+    editor.appendChild(editorActions);
+    card.appendChild(editor);
+
+    noteBtn.addEventListener('click', function () {
+      editor.classList.toggle('open');
+      if (editor.classList.contains('open')) {
+        setTimeout(function () { ta.focus(); }, 50);
       }
     });
 
@@ -1802,81 +1675,9 @@ function fallbackCopy(text) {
   document.body.appendChild(ta);
   ta.select();
   try { document.execCommand('copy'); showToast('Markdown copied'); }
-  catch (e) { showToast('Could not copy — try Export instead'); }
+  catch (e) { showToast('Could not copy'); }
   document.body.removeChild(ta);
 }
-
-var modalBackdrop = document.getElementById('modal-backdrop');
-var modalTitle = document.getElementById('modal-title');
-var modalQuote = document.getElementById('modal-quote');
-var modalBody = document.getElementById('modal-body');
-var modalDelete = document.getElementById('modal-delete');
-var modalCancel = document.getElementById('modal-cancel');
-var modalSave = document.getElementById('modal-save');
-var modalContext = null;
-
-function openNoteModal(ctx) {
-  modalContext = ctx;
-  if (ctx.attachToHighlight && ctx.note) {
-    modalTitle.textContent = 'Add note to highlight';
-    modalQuote.textContent = '“' + ctx.note.quote + '”';
-    modalBody.value = ctx.note.body || '';
-    modalDelete.style.display = 'none';
-  } else if (ctx.mode === 'edit' && ctx.note) {
-    modalTitle.textContent = 'Edit note';
-    modalQuote.textContent = '“' + ctx.note.quote + '”';
-    modalBody.value = ctx.note.body || '';
-    modalDelete.style.display = 'inline-block';
-  } else {
-    modalTitle.textContent = 'Add note';
-    modalQuote.textContent = '“' + (ctx.quote || '') + '”';
-    modalBody.value = '';
-    modalDelete.style.display = 'none';
-  }
-  modalBackdrop.classList.add('open');
-  setTimeout(function () { modalBody.focus(); }, 30);
-}
-function closeNoteModal() {
-  modalBackdrop.classList.remove('open');
-  modalContext = null;
-  modalBody.value = '';
-}
-
-modalCancel.addEventListener('click', closeNoteModal);
-modalBackdrop.addEventListener('click', function (e) {
-  if (e.target === modalBackdrop) closeNoteModal();
-});
-
-modalSave.addEventListener('click', function () {
-  if (!modalContext) { closeNoteModal(); return; }
-  var body = modalBody.value.trim();
-
-  if (modalContext.attachToHighlight && modalContext.note) {
-    attachNoteToHighlight(modalContext.note, body);
-    closeNoteModal();
-    return;
-  }
-  if (modalContext.mode === 'edit' && modalContext.note) {
-    modalContext.note.body = body;
-    modalContext.note.updatedAt = Date.now();
-    saveAnnotations();
-    renderAnnotationsList();
-    var marks = work.querySelectorAll('mark[data-hl-id="' + modalContext.note.id + '"]');
-    marks.forEach(function (mark) { mark.title = 'Note: ' + (body || '(empty)'); });
-    closeNoteModal();
-    return;
-  }
-  createAnnotation('note', 'yellow', modalContext.range, body);
-  closeNoteModal();
-});
-
-modalDelete.addEventListener('click', function () {
-  if (!modalContext || !modalContext.note) return;
-  if (confirm('Delete this note?')) {
-    deleteAnnotation(modalContext.note.id);
-    closeNoteModal();
-  }
-});
 
 document.getElementById('notesBtn').addEventListener('click', function () {
   sidebar.classList.toggle('open');
@@ -1887,18 +1688,10 @@ document.getElementById('closeSidebar').addEventListener('click', function () {
 
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
-    if (modalBackdrop.classList.contains('open')) closeNoteModal();
-    else { hidePopup(); sidebar.classList.remove('open'); }
+    hideMiniPalette();
+    sidebar.classList.remove('open');
   }
 });
-
-document.addEventListener('scroll', hidePopup, true);
-document.addEventListener('touchstart', function (e) {
-  if (popup.style.display === 'flex' && !popup.contains(e.target)
-      && !(e.target.closest && e.target.closest('mark[data-hl-id]'))) {
-    hidePopup();
-  }
-}, { passive: true });
 
 var lastScrollY = window.scrollY;
 var toolbarHideThreshold = 10;
